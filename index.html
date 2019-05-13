@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<title>Rich Text Editor Example</title>
+<?!= getSkrpt_(["JS_Custom_Build",'JS_BasicServices','JSON_Tool_Bar_Sets']); ?>
+<?!= loadCSS_(["CSS_ContentEditable"]); ?>
+
+<style type="text/css">
+.rich-text-editor, input[type=text] {
+	border: 1px #aaaaaa dashed;
+}
+
+#newcomment {
+	width: 550px;
+	height: auto;
+}
+</style>
+
+</head>
+
+<body>
+<h1>Rich Text Editor Example</h1>
+<form>
+  <fieldset>
+    <legend><span style="font-size: 16px; font-weight: bold">Caption Embedded in Border</span></legend>
+
+	<textarea name="comment" id="newcomment" class="rich-text-editor"></textarea>
+    
+    
+  </fieldset>
+</form>
+</body>
+</html>

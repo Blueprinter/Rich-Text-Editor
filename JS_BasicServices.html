@@ -1,0 +1,85 @@
+<script>
+/*
+ This code was written by Alan Wells - There is no licence
+
+
+*/
+window.cl = function(a,b) {
+  //console.log('cl ran: ' + a + " " + b)
+  if (cl.arguments.length === 2) {//two arguments were passed in
+    b = processValForLog(b);
+    var f = new Function('a','b','console.log(a + ":" + b)');//The is to avoid the update web app commenting out this line
+    f(a,b);
+  } else {
+    var f = new Function('a','console.log(a)');//The is to avoid the update web app commenting out this line
+    f(a);
+  }
+}
+
+window.processValForLog = function(val) {
+try{
+  var typeOfThisVal;
+  
+  typeOfThisVal = typeof val;
+
+  if (val) {
+    if (typeOfThisVal === 'object') {//The data type is an object
+      
+      if (Array.isArray(val)) {//test for the value being an array
+        //console.log('it is an array')
+        if (val.toString().indexOf("[object Object]") !== -1) {
+          val = JSON.stringify(val);
+        } else {
+          val = val.toString();
+        }
+        //console.log('val: ' + val)
+      } else {//It is an object but not an array
+        //console.log('its NOT an array')
+        try{
+          val = JSON.stringify(val);//Test for whether it is a date
+        }catch(e) {//If this is an invalid date then JSON stringify will fail
+          //console.log('Error stringifying')
+        }
+      }
+      
+      //console.log('typeof val: ' + typeof val)
+      
+        if (typeof val !== 'string') {
+          try{
+            val = val.toString();
+          }catch(e) {
+            val = e.message;
+          }
+        }
+      
+      if (val.indexOf("{") !== 0 && typeof val !== 'string') {
+        val = val.toString();
+      }
+      
+      //continue;
+    }
+  }
+  
+  if (typeOfThisVal === 'number') {
+    val = '"' + val.toString();
+  }
+  
+  if (val === undefined) {//Avoid having all three cells undefined
+    val = 'UNDEFINEDDD';
+  } else if (val === null) {
+    val = 'NULLLL';
+  } else if (val === false) {
+    val = 'FALZZE';
+  } else if (val === true) {
+    val = 'TREWWW';
+  }
+  
+  return val;
+}catch(e) {
+  var f = new Function('e','console.log(e.message + ":\n\n" + e.stack)');//The is to avoid the update web app commenting out this line
+  f(e);
+}
+}
+</script>
+
+

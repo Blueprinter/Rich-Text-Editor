@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+
+  <style>
+    #idLoadBox {
+      border: 1px solid black;
+    }
+    .cntrIt  {
+      width:600px;
+      padding:12px;
+      margin: auto;
+    }
+  </style>
+
+  <body style="padding:20px">
+    <div class="cntrIt" id="idLoadBox">
+      <p>Which App do you want to load?</p>
+    
+      <form style="padding:20px">
+        <input type="radio" name="whichApp" value="Simple"> Simple - Hard coded toolbar and menu<br>
+        <input type="radio" name="whichApp" value="Pro"> Pro - Dynamically built HTML, toolbar and menu based on settings<br>
+      </form>
+    
+      <br/>
+      <button onclick="loadApp()">Load</button>
+    </div>
+    
+    <div class="cntrIt">
+      <p>This App is built based on:</p>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content/Rich-Text_Editing_in_Mozilla#Example_a_simple_but_complete_Rich_Text_Editor">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content/Rich-Text_Editing_in_Mozilla#Example_a_simple_but_complete_Rich_Text_Editor</a>
+
+    </div>
+    
+    <script>
+      window.loadApp = function() {
+        var inputs,url,whichOne;
+        inputs = document.getElementsByName('whichApp');
+        whichOne = radChk(inputs);
+        
+        url = "<?!= ScriptApp.getService().getUrl() ?>";//Get the current page URL
+        url = url + '?whichapp=' + whichOne;
+        //console.log('url: ' + url)
+        window.open(url);
+      }
+      
+      window.radChk = function(arr) {
+        var i,L;
+        L = arr.length;
+        
+        for (i=0; i<L; i++) {
+          if (arr[i].checked) {return arr[i].value;break;}
+        }
+      };
+    </script>
+  </body>
+</html>
+
+

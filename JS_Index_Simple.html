@@ -1,0 +1,75 @@
+<script>
+var EDIT_BOX, sDefTxt;//Globals
+
+function initDoc() {
+try{
+  cl('initDoc','ran')
+  EDIT_BOX = document.getElementById("textBox");
+  
+  sDefTxt = EDIT_BOX.innerHTML;
+  
+  if (document.compForm.switchMode.checked) {
+    setDocMode(true); 
+  }
+}catch(e){
+  console.log('message: ' + e.message)
+}
+}
+
+function formatDoc(sCmd, sValue) {
+  if (validateMode()) {
+    document.execCommand(sCmd, false, sValue); EDIT_BOX.focus(); 
+  }
+}
+
+function validateMode() {
+  if (!document.compForm.switchMode.checked) { return true ; }
+  alert("Uncheck \"Show HTML\".");
+  EDIT_BOX.focus();
+  return false;
+}
+
+function setDocMode(bToSource) {
+  var oContent,oPre;
+  
+  if (bToSource) {
+    oContent = document.createTextNode(EDIT_BOX.innerHTML);
+    EDIT_BOX.innerHTML = "";//Remove everything from the DIV
+    EDIT_BOX.contentEditable = false;
+    
+    oPre = document.createElement("pre");//Create a new html element
+    
+
+    
+    oPre.id = "sourceText";
+    oPre.contentEditable = true;
+    oPre.appendChild(oContent);
+    
+    
+    EDIT_BOX.appendChild(oPre);
+    
+    
+    document.execCommand("defaultParagraphSeparator", false, "div");
+  } else {
+    if (document.all) {
+      EDIT_BOX.innerHTML = EDIT_BOX.innerText;
+    } else {
+      oContent = document.createRange();
+      oContent.selectNodeContents(EDIT_BOX.firstChild);
+      EDIT_BOX.innerHTML = oContent.toString();
+    }
+    EDIT_BOX.contentEditable = true;
+  }
+  EDIT_BOX.focus();
+}
+
+/*
+function printDoc() {
+  if (!validateMode()) { return; }
+  var oPrntWin = window.open("","_blank","width=450,height=470,left=400,top=100,menubar=yes,toolbar=no,location=no,scrollbars=yes");
+  oPrntWin.document.open();
+  oPrntWin.document.write("<!doctype html><html><head><title>Print<\/title><\/head><body onload=\"print();\">" + EDIT_BOX.innerHTML + "<\/body><\/html>");
+  oPrntWin.document.close();
+}
+*/
+</script>
