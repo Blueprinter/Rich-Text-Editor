@@ -8,7 +8,7 @@ Most of the code is from Mozilla.org
 See link:
 https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content/Rich-Text_Editing_in_Mozilla#Example_a_simple_but_complete_Rich_Text_Editor
 
-This Apps Script Web App is totally self contained.  I doesn't need any external dependencies.  If you are familiar with Apps Script, then you will know what to do with the files.
+This Apps Script Web App is totally self contained.  It doesn't need any external dependencies.  If you are familiar with Apps Script, then you will know what to do with the files.
 
 There are only two types of files inside of an Apps Script project, HTML and Script files.  All CSS and JavaScript files are in HTML files.  Script (.gs) files run on Google's servers.
 
